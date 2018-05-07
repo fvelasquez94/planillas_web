@@ -1,0 +1,882 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Planillas_webModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cargos">
+          <Key>
+            <PropertyRef Name="ID_cargo" />
+          </Key>
+          <Property Name="ID_cargo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="ID_empresa" Type="int" />
+        </EntityType>
+        <EntityType Name="Departamentos">
+          <Key>
+            <PropertyRef Name="ID_departamento" />
+          </Key>
+          <Property Name="ID_departamento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" />
+          <Property Name="descripcion" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="ID_empresa" Type="int" />
+        </EntityType>
+        <EntityType Name="Egresos_empleados">
+          <Key>
+            <PropertyRef Name="ID_egreso" />
+          </Key>
+          <Property Name="ID_egreso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_tipo_egreso" Type="int" />
+          <Property Name="ID_empleado" Type="int" />
+          <Property Name="valor" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="ID_empleado" />
+          </Key>
+          <Property Name="ID_empleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombres" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="apellidos" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="dui" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="nit" Type="varchar" MaxLength="20" />
+          <Property Name="celular" Type="varchar" MaxLength="15" />
+          <Property Name="edad" Type="int" />
+          <Property Name="estado_civil" Type="varchar" MaxLength="100" />
+          <Property Name="horas_laborales" Type="int" />
+          <Property Name="salario_mensual" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="fecha_nacimiento" Type="date" />
+          <Property Name="fecha_contratacion" Type="date" />
+          <Property Name="ID_cargo" Type="int" />
+          <Property Name="ID_departamento" Type="int" />
+          <Property Name="ID_estado" Type="int" />
+          <Property Name="ID_empresa" Type="int" />
+        </EntityType>
+        <EntityType Name="Empresas">
+          <Key>
+            <PropertyRef Name="ID_empresa" />
+          </Key>
+          <Property Name="ID_empresa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="giro" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Estados_empleado">
+          <Key>
+            <PropertyRef Name="ID_estado" />
+          </Key>
+          <Property Name="ID_estado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="200" />
+          <Property Name="ID_empresa" Type="int" />
+        </EntityType>
+        <EntityType Name="Ingresos_empleados">
+          <Key>
+            <PropertyRef Name="ID_ingreso" />
+          </Key>
+          <Property Name="ID_ingreso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_tipo_ingreso" Type="int" />
+          <Property Name="ID_empleado" Type="int" />
+          <Property Name="valor" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Tipo_usuarios">
+          <Key>
+            <PropertyRef Name="ID_tipousuario" />
+          </Key>
+          <Property Name="ID_tipousuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Tipos_egresos">
+          <Key>
+            <PropertyRef Name="ID_tipo_egreso" />
+          </Key>
+          <Property Name="ID_tipo_egreso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="200" />
+          <Property Name="ID_empresa" Type="int" />
+        </EntityType>
+        <EntityType Name="Tipos_ingresos">
+          <Key>
+            <PropertyRef Name="ID_tipo_ingreso" />
+          </Key>
+          <Property Name="ID_tipo_ingreso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="200" />
+          <Property Name="ID_empresa" Type="int" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="ID_usuario" />
+          </Key>
+          <Property Name="ID_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_completo" Type="varchar" MaxLength="200" />
+          <Property Name="correo" Type="varchar" MaxLength="100" />
+          <Property Name="contrasena" Type="varchar" MaxLength="50" />
+          <Property Name="fecha_registro" Type="datetime" />
+          <Property Name="ID_empresa" Type="int" />
+          <Property Name="ID_tipousuario" Type="int" />
+        </EntityType>
+        <Association Name="FK__Cargos__ID_empre__440B1D61">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Cargos" Type="Self.Cargos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="ID_empresa" />
+            </Principal>
+            <Dependent Role="Cargos">
+              <PropertyRef Name="ID_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Departame__ID_em__412EB0B6">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Departamentos" Type="Self.Departamentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="ID_empresa" />
+            </Principal>
+            <Dependent Role="Departamentos">
+              <PropertyRef Name="ID_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Egresos_e__ID_em__5BE2A6F2">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Egresos_empleados" Type="Self.Egresos_empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="ID_empleado" />
+            </Principal>
+            <Dependent Role="Egresos_empleados">
+              <PropertyRef Name="ID_empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Empleados__ID_ca__5441852A">
+          <End Role="Cargos" Type="Self.Cargos" Multiplicity="0..1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargos">
+              <PropertyRef Name="ID_cargo" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="ID_cargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Empleados__ID_de__5629CD9C">
+          <End Role="Departamentos" Type="Self.Departamentos" Multiplicity="0..1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamentos">
+              <PropertyRef Name="ID_departamento" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="ID_departamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Empleados__ID_em__52593CB8">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="ID_empresa" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="ID_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Empleados__ID_es__5535A963">
+          <End Role="Estados_empleado" Type="Self.Estados_empleado" Multiplicity="0..1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estados_empleado">
+              <PropertyRef Name="ID_estado" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="ID_estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Estados_e__ID_em__46E78A0C">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Estados_empleado" Type="Self.Estados_empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="ID_empresa" />
+            </Principal>
+            <Dependent Role="Estados_empleado">
+              <PropertyRef Name="ID_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ingresos___ID_em__59063A47">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Ingresos_empleados" Type="Self.Ingresos_empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="ID_empleado" />
+            </Principal>
+            <Dependent Role="Ingresos_empleados">
+              <PropertyRef Name="ID_empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tipos_egr__ID_em__4CA06362">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tipos_egresos" Type="Self.Tipos_egresos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="ID_empresa" />
+            </Principal>
+            <Dependent Role="Tipos_egresos">
+              <PropertyRef Name="ID_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tipos_ing__ID_em__49C3F6B7">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tipos_ingresos" Type="Self.Tipos_ingresos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="ID_empresa" />
+            </Principal>
+            <Dependent Role="Tipos_ingresos">
+              <PropertyRef Name="ID_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuarios__ID_emp__3C69FB99">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="ID_empresa" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="ID_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuarios__ID_tip__3E52440B">
+          <End Role="Tipo_usuarios" Type="Self.Tipo_usuarios" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_usuarios">
+              <PropertyRef Name="ID_tipousuario" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="ID_tipousuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Planillas_webModelStoreContainer">
+          <EntitySet Name="Cargos" EntityType="Self.Cargos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departamentos" EntityType="Self.Departamentos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Egresos_empleados" EntityType="Self.Egresos_empleados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empleados" EntityType="Self.Empleados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empresas" EntityType="Self.Empresas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Estados_empleado" EntityType="Self.Estados_empleado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ingresos_empleados" EntityType="Self.Ingresos_empleados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tipo_usuarios" EntityType="Self.Tipo_usuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tipos_egresos" EntityType="Self.Tipos_egresos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tipos_ingresos" EntityType="Self.Tipos_ingresos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Cargos__ID_empre__440B1D61" Association="Self.FK__Cargos__ID_empre__440B1D61">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Cargos" EntitySet="Cargos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Departame__ID_em__412EB0B6" Association="Self.FK__Departame__ID_em__412EB0B6">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Departamentos" EntitySet="Departamentos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Egresos_e__ID_em__5BE2A6F2" Association="Self.FK__Egresos_e__ID_em__5BE2A6F2">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Egresos_empleados" EntitySet="Egresos_empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Empleados__ID_ca__5441852A" Association="Self.FK__Empleados__ID_ca__5441852A">
+            <End Role="Cargos" EntitySet="Cargos" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Empleados__ID_de__5629CD9C" Association="Self.FK__Empleados__ID_de__5629CD9C">
+            <End Role="Departamentos" EntitySet="Departamentos" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Empleados__ID_em__52593CB8" Association="Self.FK__Empleados__ID_em__52593CB8">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Empleados__ID_es__5535A963" Association="Self.FK__Empleados__ID_es__5535A963">
+            <End Role="Estados_empleado" EntitySet="Estados_empleado" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Estados_e__ID_em__46E78A0C" Association="Self.FK__Estados_e__ID_em__46E78A0C">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Estados_empleado" EntitySet="Estados_empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ingresos___ID_em__59063A47" Association="Self.FK__Ingresos___ID_em__59063A47">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Ingresos_empleados" EntitySet="Ingresos_empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tipos_egr__ID_em__4CA06362" Association="Self.FK__Tipos_egr__ID_em__4CA06362">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Tipos_egresos" EntitySet="Tipos_egresos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tipos_ing__ID_em__49C3F6B7" Association="Self.FK__Tipos_ing__ID_em__49C3F6B7">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Tipos_ingresos" EntitySet="Tipos_ingresos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuarios__ID_emp__3C69FB99" Association="Self.FK__Usuarios__ID_emp__3C69FB99">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuarios__ID_tip__3E52440B" Association="Self.FK__Usuarios__ID_tip__3E52440B">
+            <End Role="Tipo_usuarios" EntitySet="Tipo_usuarios" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Planillas_webModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cargos">
+          <Key>
+            <PropertyRef Name="ID_cargo" />
+          </Key>
+          <Property Name="ID_cargo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_empresa" Type="Int32" />
+          <NavigationProperty Name="Empresas" Relationship="Self.FK__Cargos__ID_empre__440B1D61" FromRole="Cargos" ToRole="Empresas" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK__Empleados__ID_ca__5441852A" FromRole="Cargos" ToRole="Empleados" />
+        </EntityType>
+        <EntityType Name="Departamentos">
+          <Key>
+            <PropertyRef Name="ID_departamento" />
+          </Key>
+          <Property Name="ID_departamento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_empresa" Type="Int32" />
+          <NavigationProperty Name="Empresas" Relationship="Self.FK__Departame__ID_em__412EB0B6" FromRole="Departamentos" ToRole="Empresas" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK__Empleados__ID_de__5629CD9C" FromRole="Departamentos" ToRole="Empleados" />
+        </EntityType>
+        <EntityType Name="Egresos_empleados">
+          <Key>
+            <PropertyRef Name="ID_egreso" />
+          </Key>
+          <Property Name="ID_egreso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_tipo_egreso" Type="Int32" />
+          <Property Name="ID_empleado" Type="Int32" />
+          <Property Name="valor" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK__Egresos_e__ID_em__5BE2A6F2" FromRole="Egresos_empleados" ToRole="Empleados" />
+        </EntityType>
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="ID_empleado" />
+          </Key>
+          <Property Name="ID_empleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombres" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellidos" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dui" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nit" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="celular" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="edad" Type="Int32" />
+          <Property Name="estado_civil" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="horas_laborales" Type="Int32" />
+          <Property Name="salario_mensual" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="fecha_nacimiento" Type="DateTime" Precision="0" />
+          <Property Name="fecha_contratacion" Type="DateTime" Precision="0" />
+          <Property Name="ID_cargo" Type="Int32" />
+          <Property Name="ID_departamento" Type="Int32" />
+          <Property Name="ID_estado" Type="Int32" />
+          <Property Name="ID_empresa" Type="Int32" />
+          <NavigationProperty Name="Cargos" Relationship="Self.FK__Empleados__ID_ca__5441852A" FromRole="Empleados" ToRole="Cargos" />
+          <NavigationProperty Name="Departamentos" Relationship="Self.FK__Empleados__ID_de__5629CD9C" FromRole="Empleados" ToRole="Departamentos" />
+          <NavigationProperty Name="Egresos_empleados" Relationship="Self.FK__Egresos_e__ID_em__5BE2A6F2" FromRole="Empleados" ToRole="Egresos_empleados" />
+          <NavigationProperty Name="Empresas" Relationship="Self.FK__Empleados__ID_em__52593CB8" FromRole="Empleados" ToRole="Empresas" />
+          <NavigationProperty Name="Estados_empleado" Relationship="Self.FK__Empleados__ID_es__5535A963" FromRole="Empleados" ToRole="Estados_empleado" />
+          <NavigationProperty Name="Ingresos_empleados" Relationship="Self.FK__Ingresos___ID_em__59063A47" FromRole="Empleados" ToRole="Ingresos_empleados" />
+        </EntityType>
+        <EntityType Name="Empresas">
+          <Key>
+            <PropertyRef Name="ID_empresa" />
+          </Key>
+          <Property Name="ID_empresa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="giro" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cargos" Relationship="Self.FK__Cargos__ID_empre__440B1D61" FromRole="Empresas" ToRole="Cargos" />
+          <NavigationProperty Name="Departamentos" Relationship="Self.FK__Departame__ID_em__412EB0B6" FromRole="Empresas" ToRole="Departamentos" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK__Empleados__ID_em__52593CB8" FromRole="Empresas" ToRole="Empleados" />
+          <NavigationProperty Name="Estados_empleado" Relationship="Self.FK__Estados_e__ID_em__46E78A0C" FromRole="Empresas" ToRole="Estados_empleado" />
+          <NavigationProperty Name="Tipos_egresos" Relationship="Self.FK__Tipos_egr__ID_em__4CA06362" FromRole="Empresas" ToRole="Tipos_egresos" />
+          <NavigationProperty Name="Tipos_ingresos" Relationship="Self.FK__Tipos_ing__ID_em__49C3F6B7" FromRole="Empresas" ToRole="Tipos_ingresos" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK__Usuarios__ID_emp__3C69FB99" FromRole="Empresas" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Estados_empleado">
+          <Key>
+            <PropertyRef Name="ID_estado" />
+          </Key>
+          <Property Name="ID_estado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ID_empresa" Type="Int32" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK__Empleados__ID_es__5535A963" FromRole="Estados_empleado" ToRole="Empleados" />
+          <NavigationProperty Name="Empresas" Relationship="Self.FK__Estados_e__ID_em__46E78A0C" FromRole="Estados_empleado" ToRole="Empresas" />
+        </EntityType>
+        <EntityType Name="Ingresos_empleados">
+          <Key>
+            <PropertyRef Name="ID_ingreso" />
+          </Key>
+          <Property Name="ID_ingreso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_tipo_ingreso" Type="Int32" />
+          <Property Name="ID_empleado" Type="Int32" />
+          <Property Name="valor" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK__Ingresos___ID_em__59063A47" FromRole="Ingresos_empleados" ToRole="Empleados" />
+        </EntityType>
+        <EntityType Name="Tipo_usuarios">
+          <Key>
+            <PropertyRef Name="ID_tipousuario" />
+          </Key>
+          <Property Name="ID_tipousuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK__Usuarios__ID_tip__3E52440B" FromRole="Tipo_usuarios" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Tipos_egresos">
+          <Key>
+            <PropertyRef Name="ID_tipo_egreso" />
+          </Key>
+          <Property Name="ID_tipo_egreso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ID_empresa" Type="Int32" />
+          <NavigationProperty Name="Empresas" Relationship="Self.FK__Tipos_egr__ID_em__4CA06362" FromRole="Tipos_egresos" ToRole="Empresas" />
+        </EntityType>
+        <EntityType Name="Tipos_ingresos">
+          <Key>
+            <PropertyRef Name="ID_tipo_ingreso" />
+          </Key>
+          <Property Name="ID_tipo_ingreso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ID_empresa" Type="Int32" />
+          <NavigationProperty Name="Empresas" Relationship="Self.FK__Tipos_ing__ID_em__49C3F6B7" FromRole="Tipos_ingresos" ToRole="Empresas" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="ID_usuario" />
+          </Key>
+          <Property Name="ID_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_completo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="contrasena" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_registro" Type="DateTime" Precision="3" />
+          <Property Name="ID_empresa" Type="Int32" />
+          <Property Name="ID_tipousuario" Type="Int32" />
+          <NavigationProperty Name="Empresas" Relationship="Self.FK__Usuarios__ID_emp__3C69FB99" FromRole="Usuarios" ToRole="Empresas" />
+          <NavigationProperty Name="Tipo_usuarios" Relationship="Self.FK__Usuarios__ID_tip__3E52440B" FromRole="Usuarios" ToRole="Tipo_usuarios" />
+        </EntityType>
+        <Association Name="FK__Cargos__ID_empre__440B1D61">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Cargos" Type="Self.Cargos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="ID_empresa" />
+            </Principal>
+            <Dependent Role="Cargos">
+              <PropertyRef Name="ID_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Empleados__ID_ca__5441852A">
+          <End Role="Cargos" Type="Self.Cargos" Multiplicity="0..1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargos">
+              <PropertyRef Name="ID_cargo" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="ID_cargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Departame__ID_em__412EB0B6">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Departamentos" Type="Self.Departamentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="ID_empresa" />
+            </Principal>
+            <Dependent Role="Departamentos">
+              <PropertyRef Name="ID_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Empleados__ID_de__5629CD9C">
+          <End Role="Departamentos" Type="Self.Departamentos" Multiplicity="0..1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamentos">
+              <PropertyRef Name="ID_departamento" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="ID_departamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Egresos_e__ID_em__5BE2A6F2">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Egresos_empleados" Type="Self.Egresos_empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="ID_empleado" />
+            </Principal>
+            <Dependent Role="Egresos_empleados">
+              <PropertyRef Name="ID_empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Empleados__ID_em__52593CB8">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="ID_empresa" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="ID_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Empleados__ID_es__5535A963">
+          <End Role="Estados_empleado" Type="Self.Estados_empleado" Multiplicity="0..1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estados_empleado">
+              <PropertyRef Name="ID_estado" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="ID_estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ingresos___ID_em__59063A47">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Ingresos_empleados" Type="Self.Ingresos_empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="ID_empleado" />
+            </Principal>
+            <Dependent Role="Ingresos_empleados">
+              <PropertyRef Name="ID_empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Estados_e__ID_em__46E78A0C">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Estados_empleado" Type="Self.Estados_empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="ID_empresa" />
+            </Principal>
+            <Dependent Role="Estados_empleado">
+              <PropertyRef Name="ID_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tipos_egr__ID_em__4CA06362">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tipos_egresos" Type="Self.Tipos_egresos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="ID_empresa" />
+            </Principal>
+            <Dependent Role="Tipos_egresos">
+              <PropertyRef Name="ID_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tipos_ing__ID_em__49C3F6B7">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tipos_ingresos" Type="Self.Tipos_ingresos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="ID_empresa" />
+            </Principal>
+            <Dependent Role="Tipos_ingresos">
+              <PropertyRef Name="ID_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuarios__ID_emp__3C69FB99">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="ID_empresa" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="ID_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuarios__ID_tip__3E52440B">
+          <End Role="Tipo_usuarios" Type="Self.Tipo_usuarios" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_usuarios">
+              <PropertyRef Name="ID_tipousuario" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="ID_tipousuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Planillas_webEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cargos" EntityType="Self.Cargos" />
+          <EntitySet Name="Departamentos" EntityType="Self.Departamentos" />
+          <EntitySet Name="Egresos_empleados" EntityType="Self.Egresos_empleados" />
+          <EntitySet Name="Empleados" EntityType="Self.Empleados" />
+          <EntitySet Name="Empresas" EntityType="Self.Empresas" />
+          <EntitySet Name="Estados_empleado" EntityType="Self.Estados_empleado" />
+          <EntitySet Name="Ingresos_empleados" EntityType="Self.Ingresos_empleados" />
+          <EntitySet Name="Tipo_usuarios" EntityType="Self.Tipo_usuarios" />
+          <EntitySet Name="Tipos_egresos" EntityType="Self.Tipos_egresos" />
+          <EntitySet Name="Tipos_ingresos" EntityType="Self.Tipos_ingresos" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+          <AssociationSet Name="FK__Cargos__ID_empre__440B1D61" Association="Self.FK__Cargos__ID_empre__440B1D61">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Cargos" EntitySet="Cargos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Empleados__ID_ca__5441852A" Association="Self.FK__Empleados__ID_ca__5441852A">
+            <End Role="Cargos" EntitySet="Cargos" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Departame__ID_em__412EB0B6" Association="Self.FK__Departame__ID_em__412EB0B6">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Departamentos" EntitySet="Departamentos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Empleados__ID_de__5629CD9C" Association="Self.FK__Empleados__ID_de__5629CD9C">
+            <End Role="Departamentos" EntitySet="Departamentos" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Egresos_e__ID_em__5BE2A6F2" Association="Self.FK__Egresos_e__ID_em__5BE2A6F2">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Egresos_empleados" EntitySet="Egresos_empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Empleados__ID_em__52593CB8" Association="Self.FK__Empleados__ID_em__52593CB8">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Empleados__ID_es__5535A963" Association="Self.FK__Empleados__ID_es__5535A963">
+            <End Role="Estados_empleado" EntitySet="Estados_empleado" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ingresos___ID_em__59063A47" Association="Self.FK__Ingresos___ID_em__59063A47">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Ingresos_empleados" EntitySet="Ingresos_empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Estados_e__ID_em__46E78A0C" Association="Self.FK__Estados_e__ID_em__46E78A0C">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Estados_empleado" EntitySet="Estados_empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tipos_egr__ID_em__4CA06362" Association="Self.FK__Tipos_egr__ID_em__4CA06362">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Tipos_egresos" EntitySet="Tipos_egresos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tipos_ing__ID_em__49C3F6B7" Association="Self.FK__Tipos_ing__ID_em__49C3F6B7">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Tipos_ingresos" EntitySet="Tipos_ingresos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuarios__ID_emp__3C69FB99" Association="Self.FK__Usuarios__ID_emp__3C69FB99">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuarios__ID_tip__3E52440B" Association="Self.FK__Usuarios__ID_tip__3E52440B">
+            <End Role="Tipo_usuarios" EntitySet="Tipo_usuarios" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Planillas_webModelStoreContainer" CdmEntityContainer="Planillas_webEntities">
+          <EntitySetMapping Name="Cargos">
+            <EntityTypeMapping TypeName="Planillas_webModel.Cargos">
+              <MappingFragment StoreEntitySet="Cargos">
+                <ScalarProperty Name="ID_cargo" ColumnName="ID_cargo" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="ID_empresa" ColumnName="ID_empresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departamentos">
+            <EntityTypeMapping TypeName="Planillas_webModel.Departamentos">
+              <MappingFragment StoreEntitySet="Departamentos">
+                <ScalarProperty Name="ID_departamento" ColumnName="ID_departamento" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="ID_empresa" ColumnName="ID_empresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Egresos_empleados">
+            <EntityTypeMapping TypeName="Planillas_webModel.Egresos_empleados">
+              <MappingFragment StoreEntitySet="Egresos_empleados">
+                <ScalarProperty Name="ID_egreso" ColumnName="ID_egreso" />
+                <ScalarProperty Name="ID_tipo_egreso" ColumnName="ID_tipo_egreso" />
+                <ScalarProperty Name="ID_empleado" ColumnName="ID_empleado" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empleados">
+            <EntityTypeMapping TypeName="Planillas_webModel.Empleados">
+              <MappingFragment StoreEntitySet="Empleados">
+                <ScalarProperty Name="ID_empleado" ColumnName="ID_empleado" />
+                <ScalarProperty Name="nombres" ColumnName="nombres" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="dui" ColumnName="dui" />
+                <ScalarProperty Name="nit" ColumnName="nit" />
+                <ScalarProperty Name="celular" ColumnName="celular" />
+                <ScalarProperty Name="edad" ColumnName="edad" />
+                <ScalarProperty Name="estado_civil" ColumnName="estado_civil" />
+                <ScalarProperty Name="horas_laborales" ColumnName="horas_laborales" />
+                <ScalarProperty Name="salario_mensual" ColumnName="salario_mensual" />
+                <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
+                <ScalarProperty Name="fecha_contratacion" ColumnName="fecha_contratacion" />
+                <ScalarProperty Name="ID_cargo" ColumnName="ID_cargo" />
+                <ScalarProperty Name="ID_departamento" ColumnName="ID_departamento" />
+                <ScalarProperty Name="ID_estado" ColumnName="ID_estado" />
+                <ScalarProperty Name="ID_empresa" ColumnName="ID_empresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empresas">
+            <EntityTypeMapping TypeName="Planillas_webModel.Empresas">
+              <MappingFragment StoreEntitySet="Empresas">
+                <ScalarProperty Name="ID_empresa" ColumnName="ID_empresa" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="giro" ColumnName="giro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estados_empleado">
+            <EntityTypeMapping TypeName="Planillas_webModel.Estados_empleado">
+              <MappingFragment StoreEntitySet="Estados_empleado">
+                <ScalarProperty Name="ID_estado" ColumnName="ID_estado" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="ID_empresa" ColumnName="ID_empresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ingresos_empleados">
+            <EntityTypeMapping TypeName="Planillas_webModel.Ingresos_empleados">
+              <MappingFragment StoreEntitySet="Ingresos_empleados">
+                <ScalarProperty Name="ID_ingreso" ColumnName="ID_ingreso" />
+                <ScalarProperty Name="ID_tipo_ingreso" ColumnName="ID_tipo_ingreso" />
+                <ScalarProperty Name="ID_empleado" ColumnName="ID_empleado" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tipo_usuarios">
+            <EntityTypeMapping TypeName="Planillas_webModel.Tipo_usuarios">
+              <MappingFragment StoreEntitySet="Tipo_usuarios">
+                <ScalarProperty Name="ID_tipousuario" ColumnName="ID_tipousuario" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tipos_egresos">
+            <EntityTypeMapping TypeName="Planillas_webModel.Tipos_egresos">
+              <MappingFragment StoreEntitySet="Tipos_egresos">
+                <ScalarProperty Name="ID_tipo_egreso" ColumnName="ID_tipo_egreso" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="ID_empresa" ColumnName="ID_empresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tipos_ingresos">
+            <EntityTypeMapping TypeName="Planillas_webModel.Tipos_ingresos">
+              <MappingFragment StoreEntitySet="Tipos_ingresos">
+                <ScalarProperty Name="ID_tipo_ingreso" ColumnName="ID_tipo_ingreso" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="ID_empresa" ColumnName="ID_empresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="Planillas_webModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="ID_usuario" ColumnName="ID_usuario" />
+                <ScalarProperty Name="nombre_completo" ColumnName="nombre_completo" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+                <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
+                <ScalarProperty Name="ID_empresa" ColumnName="ID_empresa" />
+                <ScalarProperty Name="ID_tipousuario" ColumnName="ID_tipousuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
