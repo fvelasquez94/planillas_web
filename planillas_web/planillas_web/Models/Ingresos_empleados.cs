@@ -15,9 +15,10 @@ namespace planillas_web.Models
     public partial class Ingresos_empleados
     {
         public int ID_ingreso { get; set; }
-        public Nullable<int> ID_tipo_ingreso { get; set; }
-        public Nullable<int> ID_empleado { get; set; }
-        public Nullable<decimal> valor { get; set; }
+        public int ID_tipo_ingreso { get; set; }
+        public int ID_empleado { get; set; }
+        public decimal valor { get; set; }
+        public System.DateTime fecha { get; set; }
     
         public virtual Empleados Empleados { get; set; }
     }
