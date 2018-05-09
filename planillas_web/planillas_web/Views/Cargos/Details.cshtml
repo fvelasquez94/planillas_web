@@ -1,0 +1,34 @@
+﻿@model planillas_web.Models.Cargos
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Cargos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Empresas.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Empresas.nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_cargo }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

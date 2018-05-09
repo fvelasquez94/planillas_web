@@ -1,0 +1,32 @@
+﻿@model IEnumerable<planillas_web.Models.Tipo_usuarios>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Tipos de usuario</h2>
+
+<p>
+    @Html.ActionLink("Nuevo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Descripcion
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.descripcion)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.ID_tipousuario }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.ID_tipousuario })
+        </td>
+    </tr>
+}
+
+</table>

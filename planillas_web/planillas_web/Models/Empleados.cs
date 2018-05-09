@@ -11,7 +11,8 @@ namespace planillas_web.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Empleados
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -27,16 +28,18 @@ namespace planillas_web.Models
         public string dui { get; set; }
         public string nit { get; set; }
         public string celular { get; set; }
-        public Nullable<int> edad { get; set; }
+        public int edad { get; set; }
         public string estado_civil { get; set; }
-        public Nullable<int> horas_laborales { get; set; }
-        public Nullable<decimal> salario_mensual { get; set; }
-        public Nullable<System.DateTime> fecha_nacimiento { get; set; }
-        public Nullable<System.DateTime> fecha_contratacion { get; set; }
-        public Nullable<int> ID_cargo { get; set; }
-        public Nullable<int> ID_departamento { get; set; }
-        public Nullable<int> ID_estado { get; set; }
-        public Nullable<int> ID_empresa { get; set; }
+        public int horas_laborales { get; set; }
+        public decimal salario_mensual { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public System.DateTime fecha_nacimiento { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public System.DateTime fecha_contratacion { get; set; }
+        public int ID_cargo { get; set; }
+        public int ID_departamento { get; set; }
+        public int ID_estado { get; set; }
+        public int ID_empresa { get; set; }
     
         public virtual Cargos Cargos { get; set; }
         public virtual Departamentos Departamentos { get; set; }

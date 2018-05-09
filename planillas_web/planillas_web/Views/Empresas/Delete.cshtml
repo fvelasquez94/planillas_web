@@ -1,0 +1,40 @@
+﻿@model planillas_web.Models.Empresas
+
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+
+
+<h3>Estas seguro de eliminar este registro?</h3>
+<div>
+    <h4>Empresas</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nombre
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            Giro
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.giro)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Volver", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,143 @@
+﻿@model planillas_web.Models.Empleados
+
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+
+<h3>Estas seguro de eliminar este registro?</h3>
+<div>
+    <h4>Empleados</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nombres
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombres)
+        </dd>
+
+        <dt>
+           Apellidos
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.apellidos)
+        </dd>
+
+        <dt>
+           DUI
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dui)
+        </dd>
+
+        <dt>
+           NIT
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nit)
+        </dd>
+
+        <dt>
+            Celular
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.celular)
+        </dd>
+
+        <dt>
+            Edad
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.edad)
+        </dd>
+
+        <dt>
+           Estado civil
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estado_civil)
+        </dd>
+
+        <dt>
+           Horas laborales
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.horas_laborales)
+        </dd>
+
+        <dt>
+           Salario mensual
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.salario_mensual)
+        </dd>
+
+        <dt>
+            Fecha de nacimiento
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_nacimiento)
+        </dd>
+
+        <dt>
+            Fecha de contratacion
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_contratacion)
+        </dd>
+
+        <dt>
+            Cargo
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cargos.descripcion)
+        </dd>
+
+        <dt>
+            Departamento
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Departamentos.nombre)
+        </dd>
+
+        <dt>
+           Empresa
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Empresas.nombre)
+        </dd>
+
+        <dt>
+           Estado
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estados_empleado.descripcion)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Volver", "Index")
+        </div>
+    }
+</div>

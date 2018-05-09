@@ -1,0 +1,66 @@
+﻿@model planillas_web.Models.Usuarios
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>Usuarios</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nombre completo
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre_completo)
+        </dd>
+
+        <dt>
+           Correo
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.correo)
+        </dd>
+
+        <dt>
+           Contrasena
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.contrasena)
+        </dd>
+
+        <dt>
+            Fecha de registro
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_registro)
+        </dd>
+
+        <dt>
+            Empresa
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Empresas.nombre)
+        </dd>
+
+        <dt>
+            Tipo de usuario
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tipo_usuarios.descripcion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.ID_usuario }) |
+    @Html.ActionLink("Volver", "Index")
+</p>

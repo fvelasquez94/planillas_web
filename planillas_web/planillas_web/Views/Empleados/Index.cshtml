@@ -1,0 +1,81 @@
+﻿@model IEnumerable<planillas_web.Models.Empleados>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Empleados</h2>
+
+<p>
+    @Html.ActionLink("Nuevo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+           Nombre
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dui)
+        </th>
+        <th>
+            Horas laborales
+        </th>
+        <th>
+            Salario
+        </th>
+        <th>
+            Fecha de contratacion
+        </th>
+        <th>
+            Cargo
+        </th>
+        <th>
+            Departamento
+        </th>
+        <th>
+            Empresa
+        </th>
+        <th>
+          Estado
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombres) @Html.DisplayFor(modelItem => item.apellidos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dui)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.horas_laborales)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.salario_mensual)
+        </td>
+        <td>
+           @Convert.ToDateTime(item.fecha_contratacion).ToShortDateString()
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cargos.descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Departamentos.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Empresas.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Estados_empleado.descripcion)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.ID_empleado }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.ID_empleado }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.ID_empleado })
+        </td>
+    </tr>
+}
+
+</table>

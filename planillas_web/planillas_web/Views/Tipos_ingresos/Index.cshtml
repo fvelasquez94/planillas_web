@@ -1,0 +1,38 @@
+﻿@model IEnumerable<planillas_web.Models.Tipos_ingresos>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Tipos de ingreso</h2>
+
+<p>
+    @Html.ActionLink("Nuevo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Descripcion
+        </th>
+        <th>
+            Empresa
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Empresas.nombre)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.ID_tipo_ingreso }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.ID_tipo_ingreso })
+        </td>
+    </tr>
+}
+
+</table>

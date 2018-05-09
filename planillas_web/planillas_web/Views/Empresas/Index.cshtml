@@ -1,0 +1,39 @@
+﻿@model IEnumerable<planillas_web.Models.Empresas>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Empresas</h2>
+
+<p>
+    @Html.ActionLink("Nuevo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Nombre
+        </th>
+        <th>
+            Giro
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.giro)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id = item.ID_empresa }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id = item.ID_empresa }) |
+            @Html.ActionLink("Imprimir lista de empleados", "ImprimirEmpleados", new { id = item.ID_empresa })
+        </td>
+    </tr>
+}
+
+</table>

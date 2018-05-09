@@ -1,0 +1,57 @@
+﻿@model IEnumerable<planillas_web.Models.Usuarios>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Usuarios</h2>
+
+<p>
+    @Html.ActionLink("Nuevo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Nombre completo
+        </th>
+        <th>
+            Correo
+        </th>
+        <th>
+            Fecha de registro
+        </th>
+        <th>
+            Empresa
+        </th>
+        <th>
+            Tipo de usuario
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre_completo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.correo)
+        </td>
+        <td>
+            @Convert.ToDateTime(item.fecha_registro).ToShortDateString()
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Empresas.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tipo_usuarios.descripcion)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.ID_usuario }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.ID_usuario }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.ID_usuario })
+        </td>
+    </tr>
+}
+
+</table>
